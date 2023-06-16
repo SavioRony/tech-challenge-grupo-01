@@ -1,0 +1,10 @@
+spring:
+  main:
+    banner-mode: "console"
+  application:
+    name: tech-challenge-grupo01
+
+server:
+  port: 8080
+  servlet:
+    context-path: /techchallengegrupo01
