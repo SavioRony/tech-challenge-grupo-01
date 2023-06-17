@@ -7,4 +7,4 @@ spring:
 server:
   port: 8080
   servlet:
-    context-path: /techchallengegrupo01
+    context-path: /tech-challenge-grupo01
