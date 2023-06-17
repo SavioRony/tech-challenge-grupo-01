@@ -17,7 +17,6 @@ public class EnderecoRequestDTO {
     private String cidade;
     @NotBlank(message = "Estado não pode ser nulo ou vazio")
     private String estado;
-    @NotBlank(message = "Estado não pode ser nulo ou vazio")
     @Pattern(regexp = "\\d{8}", message = "O CEP deve estar no formato 99999999")
     private String cep;
     private String numero;
