@@ -347,11 +347,20 @@ os usuários. Com eles, é possível:
 
 
 # 📋Desafios e soluções
+
+## Arquitetura
+Na primeira fase do projeto, decidimos utilizar uma arquitetura monolítica devido ao fato de termos poucas APIs e a simplicidade de manutenção que ela oferece. Nesse contexto, com um número limitado de APIs e funcionalidades, a arquitetura monolítica se mostrou uma escolha adequada.
+
+Optar por uma arquitetura monolítica simplifica o desenvolvimento e a manutenção da aplicação, uma vez que todas as funcionalidades estão agrupadas em um único sistema. 
+
+É importante ressaltar que essa decisão arquitetural foi tomada considerando o contexto atual da aplicação. Conforme a aplicação evolui e a complexidade aumenta, poderemos avaliar a possibilidade de migrar para uma arquitetura mais distribuída, como a arquitetura de microserviços, para melhor atender às necessidades futuras.
+
+## Gestão de tempo
 Um dos principais desafios que enfrentamos foi conciliar os horários disponíveis de cada membro da equipe.
 Com compromissos individuais, como estudos e trabalhos paralelos, houve divergências de disponibilidade de tempo.
 
 Para contornar essa situação, optamos por realizar reuniões nos fins de semana. Além disso, utilizamos ferramentas de comunicação online, como
-videoconferências e plataformas colaborativas, para manter a conexão e avançar nos trabalhos mesmo à distância.
+videoconferências, para manter a conexão e avançar nos trabalhos mesmo à distância.
 
 Essa abordagem nos permitiu superar os desafios de disponibilidade de tempo e manter um fluxo de trabalho
 eficiente, alcançando nossos objetivos com sucesso.
