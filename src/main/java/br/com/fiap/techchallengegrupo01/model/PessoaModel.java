@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PessoaModel {
 
+    private Long id;
     @NotBlank(message = "Nome não pode ser nulo ou vazio")
     private String nome;
     @NotBlank(message = "Data de nacimento não pode ser nulo ou vazio")

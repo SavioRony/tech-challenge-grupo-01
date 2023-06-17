@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
 public class PessoaService {
@@ -16,11 +18,18 @@ public class PessoaService {
 
     private final PessoaMapper mapper;
 
-    public Boolean savePessoa(PessoaRequestDTO requestDTO) {
-        PessoaModel pessoaModel = mapper.toModel(requestDTO);
-        if (pessoaModel != null) {
-            return repository.save(pessoaModel) != null;
-        }
-        return false;
+    public PessoaModel savePessoa(PessoaRequestDTO requestDTO) {
+
+        return repository.save(mapper.toModel(requestDTO));
+    }
+
+    public Set<PessoaModel> getAll(){
+
+        return repository.getAll();
+    }
+
+    public PessoaModel getById(Long id){
+
+        return repository.getById(id);
     }
 }

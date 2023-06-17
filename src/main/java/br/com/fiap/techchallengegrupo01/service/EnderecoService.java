@@ -7,6 +7,8 @@ import br.com.fiap.techchallengegrupo01.repository.EnderecoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
 public class EnderecoService {
@@ -14,11 +16,18 @@ public class EnderecoService {
     private final EnderecoRepository repository;
     private final EnderecoMapper mapper;
 
-    public Boolean saveEndereco(EnderecoRequestDTO requestDTO) {
-        EnderecoModel endereco = mapper.toModel(requestDTO);
-        if (endereco != null) {
-            return repository.save(endereco) != null;
-        }
-        return false;
+    public EnderecoModel saveEndereco(EnderecoRequestDTO requestDTO) {
+
+        return  repository.save(mapper.toModel(requestDTO));
+    }
+
+    public Set<EnderecoModel> getAll(){
+
+        return repository.getAll();
+    }
+
+    public EnderecoModel getAll(Long id){
+
+        return repository.getById(id);
     }
 }

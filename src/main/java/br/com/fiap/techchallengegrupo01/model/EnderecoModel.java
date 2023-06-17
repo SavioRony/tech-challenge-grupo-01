@@ -13,6 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class EnderecoModel {
 
+    private Long id;
     @NotBlank(message = "Rua não pode ser nulo ou vazio")
     private String rua;
     @NotBlank(message = "Bairro não pode ser nulo ou vazio")
