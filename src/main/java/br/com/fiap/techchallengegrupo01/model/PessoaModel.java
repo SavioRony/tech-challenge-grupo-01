@@ -1,12 +1,10 @@
 package br.com.fiap.techchallengegrupo01.model;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Date;
 
 @Getter
 @Setter
@@ -14,12 +12,11 @@ import java.util.Date;
 @NoArgsConstructor
 public class PessoaModel {
 
-    @NotNull
+    @NotBlank(message = "Nome não pode ser nulo ou vazio")
     private String nome;
-    @NotNull
+    @NotBlank(message = "Data de nacimento não pode ser nulo ou vazio")
     private String dataNascimento;
-    @NotNull
+    @NotBlank(message = "Sexo não pode ser nulo ou vazio")
     private String sexo;
-    @NotNull
     private String parentesco;
 }

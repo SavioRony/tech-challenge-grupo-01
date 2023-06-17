@@ -1,7 +1,7 @@
 package br.com.fiap.techchallengegrupo01.controller;
 
-import br.com.fiap.techchallengegrupo01.dto.PessoaRequestDTO;
-import br.com.fiap.techchallengegrupo01.service.PessoaService;
+import br.com.fiap.techchallengegrupo01.dto.EnderecoRequestDTO;
+import br.com.fiap.techchallengegrupo01.service.EnderecoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/pessoas")
-public class PessoaController {
+@RequestMapping("/enderecos")
+public class EnderecoController {
     @Autowired
-    private PessoaService pessoaService;
+    private EnderecoService enderecoService;
 
     @PostMapping
-    public ResponseEntity<?> savePessoas(@RequestBody @Valid PessoaRequestDTO requestDTO) {
-        Boolean pessoa = pessoaService.savePessoa(requestDTO);
-        return (pessoa)
+    public ResponseEntity<?> saveEndereco(@RequestBody @Valid EnderecoRequestDTO requestDTO) {
+        Boolean retorno = enderecoService.saveEndereco(requestDTO);
+        return (retorno)
                 ? ResponseEntity.ok().build()
                 : ResponseEntity.notFound().build();
     }

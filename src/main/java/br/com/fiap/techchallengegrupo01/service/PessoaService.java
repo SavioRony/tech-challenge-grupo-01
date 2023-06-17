@@ -19,8 +19,7 @@ public class PessoaService {
     public Boolean savePessoa(PessoaRequestDTO requestDTO) {
         PessoaModel pessoaModel = mapper.toModel(requestDTO);
         if (pessoaModel != null) {
-            repository.save(pessoaModel);
-            return true;
+            return repository.save(pessoaModel) != null;
         }
         return false;
     }
