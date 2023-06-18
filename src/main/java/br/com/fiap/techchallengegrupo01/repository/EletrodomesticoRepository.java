@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class EletrodomesticoRepository {
@@ -23,7 +25,7 @@ public class EletrodomesticoRepository {
     }
 
     public Set<EletrodomesticoModel> getAll(){
-        return new HashSet<>(dao.stream().sorted(Comparator.comparing(EletrodomesticoModel::getId)).toList());
+        return dao.stream().sorted(Comparator.comparing(EletrodomesticoModel::getId)).collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public EletrodomesticoModel getById(Long id){

@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class EnderecoRepository {
@@ -23,7 +25,7 @@ public class EnderecoRepository {
     }
 
     public Set<EnderecoModel> getAll(){
-        return new HashSet<>(dao.stream().sorted(Comparator.comparing(EnderecoModel::getId)).toList());
+        return dao.stream().sorted(Comparator.comparing(EnderecoModel::getId)).collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public EnderecoModel getById(Long id){

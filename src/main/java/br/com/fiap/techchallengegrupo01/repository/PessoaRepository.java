@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class PessoaRepository {
@@ -23,7 +25,7 @@ public class PessoaRepository {
     }
 
     public Set<PessoaModel> getAll(){
-        return new HashSet<>(dao.stream().sorted(Comparator.comparing(PessoaModel::getId)).toList());
+        return dao.stream().sorted(Comparator.comparing(PessoaModel::getId)).collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     public PessoaModel getById(Long id){
