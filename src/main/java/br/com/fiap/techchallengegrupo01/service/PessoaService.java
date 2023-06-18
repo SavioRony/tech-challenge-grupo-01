@@ -32,4 +32,14 @@ public class PessoaService {
 
         return repository.getById(id);
     }
+
+    public PessoaModel update(PessoaRequestDTO dto, Long id){
+
+        return repository.update(mapper.toModel(dto), id);
+    }
+
+    public Long delete(Long id){
+
+        return repository.delete(id);
+    }
 }

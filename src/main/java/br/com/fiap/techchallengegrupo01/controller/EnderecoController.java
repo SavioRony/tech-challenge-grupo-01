@@ -5,6 +5,7 @@ import br.com.fiap.techchallengegrupo01.model.EnderecoModel;
 import br.com.fiap.techchallengegrupo01.service.EnderecoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,8 +35,28 @@ public class EnderecoController {
     @GetMapping("/{id}")
     public ResponseEntity<EnderecoModel> getById(@PathVariable(name = "id") Long id){
 
-        var response = service.getAll(id);
+        var response = service.getById(id);
 
         return response != null ? ResponseEntity.ok(response) : ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EnderecoModel> update(
+            @PathVariable(name = "id") Long id,
+            @RequestBody @Valid EnderecoRequestDTO dto){
+
+        var response = service.update(dto, id);
+
+        return response != null ? ResponseEntity.ok(response) : ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(name = "id") Long id){
+
+        var response = service.delete(id);
+
+        return response != null ?
+                ResponseEntity.status(HttpStatusCode.valueOf(200)).build() :
+                ResponseEntity.notFound().build();
     }
 }

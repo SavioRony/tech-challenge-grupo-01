@@ -30,4 +30,13 @@ public class EletrodomesticoService {
 
         return repository.getAll();
     }
+
+    public EletrodomesticoModel update (EletrodomesticoRequestDTO dtoUpdated, Long id){
+
+        return repository.update(mapper.toModel(dtoUpdated),id);
+    }
+
+    public Long delete(Long id){
+        return repository.delete(id);
+    }
 }

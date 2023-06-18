@@ -26,8 +26,17 @@ public class EnderecoService {
         return repository.getAll();
     }
 
-    public EnderecoModel getAll(Long id){
+    public EnderecoModel getById(Long id){
 
         return repository.getById(id);
+    }
+
+    public  EnderecoModel update(EnderecoRequestDTO dto, Long id){
+
+        return repository.update(mapper.toModel(dto), id);
+    }
+
+    public Long delete(Long id){
+        return repository.delete(id);
     }
 }
