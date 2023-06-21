@@ -103,7 +103,6 @@ os usuários. Com eles, é possível:
 
 **`GET /pessoas`**
 
-
 **Resposta**
 
 ```
@@ -124,6 +123,57 @@ os usuários. Com eles, é possível:
 |--------|-------------|
 | 200    | OK          |
 | 404    | Not Found   |
+
+### **Update de pessoas**
+
+**Requisição**
+
+**`PUT /pessoas/{ID}`**
+
+**Request**
+
+```
+{
+  "nome": "Jose dos Santos",
+  "dataNascimento": "19/03/1992",
+  "sexo": "Masculino",
+  "parentesco": "Irmão"
+}
+```
+
+**Resposta**
+
+```
+{
+  "id": 1
+  "nome": "Jose dos Santos",
+  "dataNascimento": "19/03/1992",
+  "sexo": "Masculino",
+  "parentesco": "Irmão"
+}
+```
+
+**Códigos de resposta**
+
+| Código | Descrição   |
+|--------|-------------|
+| 200    | OK          |
+| 400    | Bad Request |
+| 404    | Not Found   |
+
+### **DELETE de pessoas**
+
+**Requisição**
+
+**`DELETE /pessoas/{ID}`**
+
+**Códigos de resposta**
+
+| Código | Descrição   |
+|--------|-------------|
+| 200    | OK          |
+| 404    | Not Found   |
+
 
 ## **Endereços**
 
@@ -235,6 +285,59 @@ os usuários. Com eles, é possível:
 | 200    | OK          |
 | 404    | Not Found   |
 
+### **Update de endereços**
+
+**Requisição**
+
+**`PUT /enderecos/{ID}`**
+
+**Request**
+
+```
+  {
+    "bairro": "Centro",
+    "cidade": "São Caetano do Sul",
+    "estado": "SP",
+    "cep": "05784513",
+    "numero": "16"
+  }
+```
+
+**Resposta**
+
+```
+  {
+    "id": 1
+    "bairro": "Centro",
+    "cidade": "São Caetano do Sul",
+    "estado": "SP",
+    "cep": "05784513",
+    "numero": "16"
+  }
+```
+
+**Códigos de resposta**
+
+| Código | Descrição   |
+|--------|-------------|
+| 200    | OK          |
+| 400    | Bad Request |
+| 404    | Not Found   |
+
+### **DELETE de pessoas**
+
+**Requisição**
+
+**`DELETE /enderecos/{ID}`**
+
+**Códigos de resposta**
+
+| Código | Descrição   |
+|--------|-------------|
+| 200    | OK          |
+| 404    | Not Found   |
+
+
 ## **Eletrodomesticos**
 
 ### **Cadastro de eletrodomesticos**
@@ -329,6 +432,56 @@ os usuários. Com eles, é possível:
   }
 ]
 ```
+
+**Códigos de resposta**
+
+| Código | Descrição   |
+|--------|-------------|
+| 200    | OK          |
+| 404    | Not Found   |
+
+### **Update de endereços**
+
+**Requisição**
+
+**`PUT /eletrodomesticos/{ID}`**
+
+**Request**
+
+```
+  {
+    "tipo": "Geladeira",
+    "modelo": "W11",
+    "marca": "Brastemp",
+    "potencia": 3000
+  }
+```
+
+**Resposta**
+
+```
+   {
+    "id": 1,
+    "tipo": "Geladeira",
+    "modelo": "W11",
+    "marca": "Brastemp",
+    "potencia": 3000
+  }
+```
+
+**Códigos de resposta**
+
+| Código | Descrição   |
+|--------|-------------|
+| 200    | OK          |
+| 400    | Bad Request |
+| 404    | Not Found   |
+
+### **DELETE de pessoas**
+
+**Requisição**
+
+**`DELETE /eletrodomesticos/{ID}`**
 
 **Códigos de resposta**
 
