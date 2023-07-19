@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -25,21 +26,38 @@ public class PessoaService {
 
     public Set<PessoaModel> getAll(){
 
-        return repository.getAll();
+        return new HashSet<>(repository.findAll());
     }
 
     public PessoaModel getById(Long id){
 
-        return repository.getById(id);
+        return repository.findById(id).orElse(null);
     }
 
     public PessoaModel update(PessoaRequestDTO dto, Long id){
 
-        return repository.update(mapper.toModel(dto), id);
+        var modelById = getById(id);
+
+        if(modelById != null){
+
+            var modelToBeUpdated = mapper.toModel(dto);
+            modelToBeUpdated.setId(id);
+            return repository.save(modelToBeUpdated);
+        }
+
+        return null;
     }
 
     public Long delete(Long id){
 
-        return repository.delete(id);
+        var modelById = getById(id);
+
+        if(modelById != null){
+
+            repository.delete(modelById);
+            return id;
+
+        }
+        return null;
     }
 }
