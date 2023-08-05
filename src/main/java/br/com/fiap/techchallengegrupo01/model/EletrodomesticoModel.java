@@ -13,6 +13,7 @@ import lombok.EqualsAndHashCode;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
+@Table(name = "tb_eletrodomesticos")
 public class EletrodomesticoModel {
 
     @Id

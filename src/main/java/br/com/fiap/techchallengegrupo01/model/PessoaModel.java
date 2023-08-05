@@ -10,6 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
+@Table(name = "tb_pessoas")
 public class PessoaModel {
 
     @Id

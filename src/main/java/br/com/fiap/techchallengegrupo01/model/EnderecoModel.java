@@ -11,6 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
+@Table(name = "tb_enderecos")
 public class EnderecoModel {
 
     @Id
