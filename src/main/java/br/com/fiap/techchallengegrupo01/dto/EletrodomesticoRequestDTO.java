@@ -24,4 +24,6 @@ public class EletrodomesticoRequestDTO {
 
     @NotNull
     private Integer potencia;
+    @NotNull(message = "Id de usuario não pode ser nulo ou vazio")
+    private Long idEndereco;
 }

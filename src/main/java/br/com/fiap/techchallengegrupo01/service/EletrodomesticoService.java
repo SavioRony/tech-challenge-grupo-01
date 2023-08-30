@@ -1,26 +1,33 @@
 package br.com.fiap.techchallengegrupo01.service;
 
 import br.com.fiap.techchallengegrupo01.dto.EletrodomesticoRequestDTO;
+import br.com.fiap.techchallengegrupo01.exception.BadRequestException;
 import br.com.fiap.techchallengegrupo01.mapper.EletrodomesticoMapper;
 import br.com.fiap.techchallengegrupo01.model.EletrodomesticoModel;
+import br.com.fiap.techchallengegrupo01.model.EnderecoModel;
 import br.com.fiap.techchallengegrupo01.repository.EletrodomesticoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class EletrodomesticoService {
 
-    public final EletrodomesticoRepository repository;
-    public final EletrodomesticoMapper mapper;
+    private final EletrodomesticoRepository repository;
+    private final EletrodomesticoMapper mapper;
+    private final EnderecoService enderecoService;
 
-    public EletrodomesticoModel save(EletrodomesticoRequestDTO dto){
-
-        return repository.save(mapper.toModel(dto));
+    public EletrodomesticoModel save(EletrodomesticoRequestDTO requestDTO){
+        EnderecoModel endereco = enderecoService.getById(requestDTO.getIdEndereco());
+        if(endereco == null){
+            throw new BadRequestException("Endereço não encontrado");
+        }
+        EletrodomesticoModel eletrodomestico = mapper.toModel(requestDTO);
+        eletrodomestico.setEndereco(endereco);
+        return repository.save(eletrodomestico);
     }
 
     public EletrodomesticoModel getById(Long id){
@@ -37,8 +44,13 @@ public class EletrodomesticoService {
         var modelById = getById(id);
 
         if(modelById != null){
+            EnderecoModel endereco = enderecoService.getById(dtoUpdated.getIdEndereco());
+            if(endereco == null){
+                throw new BadRequestException("Endereço não encontrado");
+            }
             var modelToBeUpdated = mapper.toModel(dtoUpdated);
             modelToBeUpdated.setId(id);
+            modelToBeUpdated.setEndereco(endereco);
             return repository.save(modelToBeUpdated);
         }
 
