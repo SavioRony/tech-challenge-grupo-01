@@ -1,8 +1,12 @@
 package br.com.fiap.techchallengegrupo01.service;
 
 import br.com.fiap.techchallengegrupo01.dto.PessoaRequestDTO;
+import br.com.fiap.techchallengegrupo01.dto.PessoaRequestUpdateDTO;
+import br.com.fiap.techchallengegrupo01.exception.BadRequestException;
 import br.com.fiap.techchallengegrupo01.mapper.PessoaMapper;
+import br.com.fiap.techchallengegrupo01.model.EnderecoModel;
 import br.com.fiap.techchallengegrupo01.model.PessoaModel;
+import br.com.fiap.techchallengegrupo01.model.UsuarioModel;
 import br.com.fiap.techchallengegrupo01.repository.PessoaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +23,23 @@ public class PessoaService {
 
     private final PessoaMapper mapper;
 
-    public PessoaModel savePessoa(PessoaRequestDTO requestDTO) {
+    private final EnderecoService enderecoService;
 
-        return repository.save(mapper.toModel(requestDTO));
+    private final UsuarioService usuarioService;
+
+    public PessoaModel savePessoa(PessoaRequestDTO requestDTO) {
+        UsuarioModel usuario = usuarioService.getById(requestDTO.getIdUsuario());
+        if(usuario == null){
+            throw new BadRequestException("Usuario não encontrado");
+        }
+        EnderecoModel endereco = enderecoService.getByIdAndIdUsuario(requestDTO.getIdEndereco(), usuario);
+        if(endereco == null){
+            throw new BadRequestException("Endereço não encontrado");
+        }
+        PessoaModel pessoa = mapper.toModel(requestDTO);
+        pessoa.setEndereco(endereco);
+        pessoa.setUsuario(usuario);
+        return repository.save(pessoa);
     }
 
     public Set<PessoaModel> getAll(){
@@ -30,19 +48,22 @@ public class PessoaService {
     }
 
     public PessoaModel getById(Long id){
-
         return repository.findById(id).orElse(null);
     }
 
-    public PessoaModel update(PessoaRequestDTO dto, Long id){
+    public PessoaModel update(PessoaRequestUpdateDTO requestDTO, Long id){
 
-        var modelById = getById(id);
-
-        if(modelById != null){
-
-            var modelToBeUpdated = mapper.toModel(dto);
-            modelToBeUpdated.setId(id);
-            return repository.save(modelToBeUpdated);
+        var pessoa = getById(id);
+        if(pessoa != null){
+            EnderecoModel endereco = enderecoService.getByIdAndIdUsuario(requestDTO.getIdEndereco(), pessoa.getUsuario());
+            if(endereco == null){
+                throw new BadRequestException("Endereço não encontrado");
+            }
+            var pessoaModel = mapper.toModelUpdate(requestDTO);
+            pessoaModel.setId(id);
+            pessoaModel.setUsuario(pessoa.getUsuario());
+            pessoaModel.setEndereco(endereco);
+            return repository.save(pessoaModel);
         }
 
         return null;
@@ -50,14 +71,12 @@ public class PessoaService {
 
     public Long delete(Long id){
 
-        var modelById = getById(id);
-
-        if(modelById != null){
-
-            repository.delete(modelById);
+        var pessoa = getById(id);
+        if(pessoa != null){
+            repository.deleteById(pessoa.getId());
             return id;
-
         }
         return null;
     }
+
 }

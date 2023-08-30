@@ -1,6 +1,8 @@
 package br.com.fiap.techchallengegrupo01.handler;
 
 
+import br.com.fiap.techchallengegrupo01.exception.BadRequestException;
+import br.com.fiap.techchallengegrupo01.exception.BadRequestExceptionDetails;
 import br.com.fiap.techchallengegrupo01.exception.ValidationExceptionDetails;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +32,16 @@ public class RestExceptionHandler {
                 .fieldsMessage(fieldsMessage)
                 .build(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<BadRequestExceptionDetails> handlerBadRequestException(BadRequestException bre){
+        return new ResponseEntity<>(BadRequestExceptionDetails.builder()
+                .status(HttpStatus.BAD_REQUEST.value())
+                .title("Bad Request Exception, check the Documentation")
+                .details(bre.getMessage())
+                .build(), HttpStatus.BAD_REQUEST);
+    }
+
 
 
 }

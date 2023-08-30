@@ -23,9 +23,11 @@ public class PessoaModel {
     @NotBlank(message = "Sexo não pode ser nulo ou vazio")
     private String sexo;
     private String parentesco;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_endereco")
     private EnderecoModel endereco;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
     private UsuarioModel usuario;

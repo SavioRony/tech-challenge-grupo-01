@@ -24,10 +24,8 @@ public class UsuarioModel {
     private String dataNascimento;
     @NotBlank(message = "Sexo não pode ser nulo ou vazio")
     private String sexo;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario")
-    @ElementCollection
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<PessoaModel> pessoas;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "usuario")
-    @ElementCollection
     private List<EnderecoModel> enderecos;
 }

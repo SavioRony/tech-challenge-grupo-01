@@ -3,6 +3,7 @@ package br.com.fiap.techchallengegrupo01.service;
 import br.com.fiap.techchallengegrupo01.dto.EnderecoRequestDTO;
 import br.com.fiap.techchallengegrupo01.mapper.EnderecoMapper;
 import br.com.fiap.techchallengegrupo01.model.EnderecoModel;
+import br.com.fiap.techchallengegrupo01.model.UsuarioModel;
 import br.com.fiap.techchallengegrupo01.repository.EnderecoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,9 @@ public class EnderecoService {
 
     public EnderecoModel getById(Long id){
        return repository.findById(id).orElse(null);
+    }
+    public EnderecoModel getByIdAndIdUsuario(Long idEndereco, UsuarioModel usuario){
+        return repository.findByIdAndUsuario(idEndereco, usuario);
     }
 
     public  EnderecoModel update(EnderecoRequestDTO dto, Long id){

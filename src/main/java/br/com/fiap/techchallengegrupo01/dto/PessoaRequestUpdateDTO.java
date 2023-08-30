@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PessoaRequestDTO {
+public class PessoaRequestUpdateDTO {
 
     @NotBlank(message = "Nome não pode ser nulo ou vazio")
     private String nome;
@@ -16,8 +16,6 @@ public class PessoaRequestDTO {
     @NotBlank(message = "Sexo não pode ser nulo ou vazio")
     private String sexo;
     private String parentesco;
-    @NotNull(message = "Id de usuario não pode ser nulo ou vazio")
-    private Long idUsuario;
     @NotNull(message = "Id de usuario não pode ser nulo ou vazio")
     private Long idEndereco;
 }
