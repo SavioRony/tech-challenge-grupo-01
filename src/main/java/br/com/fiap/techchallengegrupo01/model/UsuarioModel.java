@@ -4,14 +4,16 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
-@Table(name = "tb_pessoas")
-public class PessoaModel {
+@Table(name = "tb_usuario")
+public class UsuarioModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +24,10 @@ public class PessoaModel {
     private String dataNascimento;
     @NotBlank(message = "Sexo não pode ser nulo ou vazio")
     private String sexo;
-    private String parentesco;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "id_endereco")
-    private EnderecoModel endereco;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_usuario")
-    private UsuarioModel usuario;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usuario")
+    @ElementCollection
+    private List<PessoaModel> pessoas;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "usuario")
+    @ElementCollection
+    private List<EnderecoModel> enderecos;
 }

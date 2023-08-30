@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -28,4 +30,10 @@ public class EnderecoModel {
     @Pattern(regexp = "\\d{8}", message = "O CEP deve estar no formato 99999999")
     private String cep;
     private String numero;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "endereco")
+    @ElementCollection
+    private List<EletrodomesticoModel> eletrodomesticos;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_usuario")
+    private UsuarioModel usuario;
 }

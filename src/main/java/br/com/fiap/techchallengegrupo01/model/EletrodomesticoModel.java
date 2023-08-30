@@ -27,4 +27,7 @@ public class EletrodomesticoModel {
     private String marca;
 
     private Integer potencia;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_endereco")
+    private EnderecoModel endereco;
 }
