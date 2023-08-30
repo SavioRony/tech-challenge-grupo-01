@@ -4,7 +4,6 @@ import br.com.fiap.techchallengegrupo01.dto.PessoaRequestDTO;
 import br.com.fiap.techchallengegrupo01.dto.PessoaRequestUpdateDTO;
 import br.com.fiap.techchallengegrupo01.dto.PessoaResponseDTO;
 import br.com.fiap.techchallengegrupo01.mapper.PessoaMapper;
-import br.com.fiap.techchallengegrupo01.model.PessoaModel;
 import br.com.fiap.techchallengegrupo01.service.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -13,7 +12,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +23,7 @@ import java.util.Set;
 @RestController
 @RequestMapping("/pessoas")
 @Tag(name = "Pessoa", description = "Serviço para gestão de pessoas")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PessoaController {
     @Autowired
     private PessoaService service;
@@ -53,7 +52,7 @@ public class PessoaController {
                     @ApiResponse(description = "Success", responseCode = "200",
                             content = {@Content(
                                     mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = PessoaModel.class))
+                                    array = @ArraySchema(schema = @Schema(implementation = PessoaResponseDTO.class))
                             )}),
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content)
             })
@@ -69,7 +68,7 @@ public class PessoaController {
             tags = {"Pessoa"},
             responses = {
                     @ApiResponse(description = "Success", responseCode = "200",
-                            content = @Content(schema = @Schema(implementation = PessoaModel.class))
+                            content = @Content(schema = @Schema(implementation = PessoaResponseDTO.class))
                     ),
                     @ApiResponse(description = "Not Found", responseCode = "404", content = @Content)
             })

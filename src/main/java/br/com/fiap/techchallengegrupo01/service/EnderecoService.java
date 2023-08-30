@@ -1,6 +1,8 @@
 package br.com.fiap.techchallengegrupo01.service;
 
 import br.com.fiap.techchallengegrupo01.dto.EnderecoRequestDTO;
+import br.com.fiap.techchallengegrupo01.dto.EnderecoRequestUpdateDTO;
+import br.com.fiap.techchallengegrupo01.exception.BadRequestException;
 import br.com.fiap.techchallengegrupo01.mapper.EnderecoMapper;
 import br.com.fiap.techchallengegrupo01.model.EnderecoModel;
 import br.com.fiap.techchallengegrupo01.model.UsuarioModel;
@@ -17,10 +19,17 @@ public class EnderecoService {
 
     private final EnderecoRepository repository;
     private final EnderecoMapper mapper;
+    private final UsuarioService usuarioService;
+
 
     public EnderecoModel saveEndereco(EnderecoRequestDTO requestDTO) {
-
-        return  repository.save(mapper.toModel(requestDTO));
+        UsuarioModel usuario = usuarioService.getById(requestDTO.getIdUsuario());
+        if(usuario == null){
+            throw new BadRequestException("Usuario não encontrado");
+        }
+        EnderecoModel endereco = mapper.toModel(requestDTO);
+        endereco.setUsuario(usuario);
+        return repository.save(endereco);
     }
 
     public Set<EnderecoModel> getAll(){
@@ -34,16 +43,14 @@ public class EnderecoService {
         return repository.findByIdAndUsuario(idEndereco, usuario);
     }
 
-    public  EnderecoModel update(EnderecoRequestDTO dto, Long id){
+    public  EnderecoModel update(EnderecoRequestUpdateDTO dto, Long id){
+        var endereco = getById(id);
 
-        var modelById = getById(id);
-
-        if(modelById != null){
-
-            var modelToBeUpdated = mapper.toModel(dto);
-            modelToBeUpdated.setId(id);
-            return repository.save(modelToBeUpdated);
-
+        if(endereco != null){
+            var enderecoUpdate = mapper.toModel(dto);
+            enderecoUpdate.setId(id);
+            enderecoUpdate.setUsuario(endereco.getUsuario());
+            return repository.save(enderecoUpdate);
         }
         return null;
     }

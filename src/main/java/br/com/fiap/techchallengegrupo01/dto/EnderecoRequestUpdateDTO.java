@@ -1,14 +1,13 @@
 package br.com.fiap.techchallengegrupo01.dto;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class EnderecoRequestDTO {
+public class EnderecoRequestUpdateDTO {
 
     @NotBlank(message = "Rua não pode ser nulo ou vazio")
     private String rua;
@@ -21,6 +20,4 @@ public class EnderecoRequestDTO {
     @Pattern(regexp = "\\d{8}", message = "O CEP deve estar no formato 99999999")
     private String cep;
     private String numero;
-    @NotNull(message = "Id de usuario não pode ser nulo ou vazio")
-    private Long idUsuario;
 }
