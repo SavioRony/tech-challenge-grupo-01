@@ -25,6 +25,151 @@ os usuários. Com eles, é possível:
 # ⚒️ Documentação das APIs
 **Path do projeto:**
 **`/tech-challenge-grupo01`**
+
+## **Usuario**
+
+### **Cadastro de usuarios**
+
+**Requisição**
+
+**`POST /usuarios`**
+
+**Parâmetros da requisição**
+
+| Parâmetro       | Tipo     |
+|-----------------|----------|
+| nome            | String   |
+| dataNascimento  | String   |
+| sexo            | String   |
+
+**Request**
+
+```
+{
+  "nome": "Mario dos Santos",
+  "dataNascimento": "19/03/1992",
+  "sexo": "Masculino"
+}
+```
+**Resposta**
+
+```
+{
+  "id": 1
+  "nome": "Mario dos Santos",
+  "dataNascimento": "19/03/1992",
+  "sexo": "Masculino"
+}
+```
+
+**Códigos de resposta**
+
+| Código | Descrição   |
+|--------|-------------|
+| 200    | OK          |
+| 400    | Bad Request |
+| 404    | Not Found   |
+
+### **Buscar usuarios por ID**
+
+**Requisição**
+
+**`GET /usuarios/{ID}`**
+
+
+**Resposta**
+
+```
+{
+  "id": 1
+  "nome": "Mario dos Santos",
+  "dataNascimento": "19/03/1992",
+  "sexo": "Masculino"
+}
+```
+
+**Códigos de resposta**
+
+| Código | Descrição   |
+|--------|-------------|
+| 200    | OK          |
+| 404    | Not Found   |
+
+### **Lista de usuarios**
+
+**Requisição**
+
+**`GET /usuarios`**
+
+**Resposta**
+
+```
+[
+  {
+    "id": 1
+    "nome": "Mario dos Santos",
+    "dataNascimento": "19/03/1992",
+    "sexo": "Masculino"
+  }
+]
+```
+
+**Códigos de resposta**
+
+| Código | Descrição   |
+|--------|-------------|
+| 200    | OK          |
+| 404    | Not Found   |
+
+### **Update de usuarios**
+
+**Requisição**
+
+**`PUT /usuarios/{ID}`**
+
+**Request**
+
+```
+{
+  "nome": "Jose dos Santos",
+  "dataNascimento": "19/03/1992",
+  "sexo": "Masculino"
+}
+```
+
+**Resposta**
+
+```
+{
+  "id": 1
+  "nome": "Jose dos Santos",
+  "dataNascimento": "19/03/1992",
+  "sexo": "Masculino"
+}
+```
+
+**Códigos de resposta**
+
+| Código | Descrição   |
+|--------|-------------|
+| 200    | OK          |
+| 400    | Bad Request |
+| 404    | Not Found   |
+
+### **DELETE de usuarios**
+
+**Requisição**
+
+**`DELETE /usuarios/{ID}`**
+
+**Códigos de resposta**
+
+| Código | Descrição   |
+|--------|-------------|
+| 200    | OK          |
+| 404    | Not Found   |
+
+
 ## **Pessoas**
 
 ### **Cadastro de pessoas**
@@ -41,6 +186,9 @@ os usuários. Com eles, é possível:
 | dataNascimento  | String   |
 | sexo            | String   |
 | parentesco      | String   |
+| idUsuario | Long   |
+| idEndereco | Long   |
+
 **Request**
 
 ```
@@ -48,7 +196,9 @@ os usuários. Com eles, é possível:
   "nome": "Jose dos Santos",
   "dataNascimento": "19/03/1992",
   "sexo": "Masculino",
-  "parentesco": "Irmão"
+  "parentesco": "Irmão",
+  "idUsuario": 1,
+  "idEndereco": 1
 }
 ```
 **Resposta**
@@ -59,7 +209,13 @@ os usuários. Com eles, é possível:
   "nome": "Jose dos Santos",
   "dataNascimento": "19/03/1992",
   "sexo": "Masculino",
-  "parentesco": "Irmão"
+  "parentesco": "Irmão",
+  "endereco": {
+    "id": 1
+  },
+  "usuario": {
+    "id": 1
+  }
 }
 ```
 
@@ -86,7 +242,13 @@ os usuários. Com eles, é possível:
   "nome": "Jose dos Santos",
   "dataNascimento": "19/03/1992",
   "sexo": "Masculino",
-  "parentesco": "Irmão"
+  "parentesco": "Irmão",
+  "endereco": {
+    "id": 1
+  },
+  "usuario": {
+    "id": 1
+  }
 }
 ```
 
@@ -112,7 +274,13 @@ os usuários. Com eles, é possível:
     "nome": "Jose dos Santos",
     "dataNascimento": "19/03/1992",
     "sexo": "Masculino",
-    "parentesco": "Irmão"
+    "parentesco": "Irmão",
+    "endereco": {
+      "id": 1
+    },
+    "usuario": {
+      "id": 1
+    }
   }
 ]
 ```
@@ -137,7 +305,8 @@ os usuários. Com eles, é possível:
   "nome": "Jose dos Santos",
   "dataNascimento": "19/03/1992",
   "sexo": "Masculino",
-  "parentesco": "Irmão"
+  "parentesco": "Irmão",
+  "idEndereco": 1
 }
 ```
 
@@ -149,7 +318,13 @@ os usuários. Com eles, é possível:
   "nome": "Jose dos Santos",
   "dataNascimento": "19/03/1992",
   "sexo": "Masculino",
-  "parentesco": "Irmão"
+  "parentesco": "Irmão",
+  "endereco": {
+    "id": 1
+  },
+  "usuario": {
+    "id": 1
+  }
 }
 ```
 
@@ -185,14 +360,15 @@ os usuários. Com eles, é possível:
 
 **Parâmetros da requisição**
 
-| Parâmetro | Tipo     |
-|-----------|----------|
-| rua       | String   |
-| bairro    | String   |
-| cidade    | String   |
-| estado    | String   |
-| cep       | String   |
-| numero    | String   |
+| Parâmetro | Tipo   |
+|-----------|--------|
+| rua       | String |
+| bairro    | String |
+| cidade    | String |
+| estado    | String |
+| cep       | String |
+| numero    | String |
+| idUsuario | Long   |
 
 **Request**
 
@@ -203,7 +379,8 @@ os usuários. Com eles, é possível:
   "cidade": "São Caetano do Sul",
   "estado": "SP",
   "cep": "05784513",
-  "numero": "16"
+  "numero": "16",
+  "idUsuario": 1
 }
 ```
 **Resposta**
@@ -216,7 +393,10 @@ os usuários. Com eles, é possível:
   "cidade": "São Caetano do Sul",
   "estado": "SP",
   "cep": "05784513",
-  "numero": "16"
+  "numero": "16",
+  "usuario": {
+    "id": 1
+  }
 }
 ```
 
@@ -240,11 +420,15 @@ os usuários. Com eles, é possível:
 ```
 {
   "id": 1
+  "rua": "Rua amazona",
   "bairro": "Centro",
   "cidade": "São Caetano do Sul",
   "estado": "SP",
   "cep": "05784513",
-  "numero": "16"
+  "numero": "16",
+  "usuario": {
+    "id": 1
+  }
 }
 ```
 
@@ -269,11 +453,15 @@ os usuários. Com eles, é possível:
 [
   {
     "id": 1
+    "rua": "Rua amazona",
     "bairro": "Centro",
     "cidade": "São Caetano do Sul",
     "estado": "SP",
     "cep": "05784513",
-    "numero": "16"
+    "numero": "16",
+    "usuario": {
+      "id": 1
+    }
   }
 ]
 ```
@@ -308,11 +496,15 @@ os usuários. Com eles, é possível:
 ```
   {
     "id": 1
+    "rua": "Rua amazona",
     "bairro": "Centro",
     "cidade": "São Caetano do Sul",
     "estado": "SP",
     "cep": "05784513",
-    "numero": "16"
+    "numero": "16",
+    "usuario": {
+      "id": 1
+    }
   }
 ```
 
@@ -354,6 +546,7 @@ os usuários. Com eles, é possível:
 | modelo    | String  |
 | marca     | String  |
 | potencia  | Integer |
+| idEndereco  | Long    |
 
 **Request**
 
@@ -362,7 +555,8 @@ os usuários. Com eles, é possível:
   "tipo": "Geladeira",
   "modelo": "W11",
   "marca": "Brastemp",
-  "potencia": 3000
+  "potencia": 3000,
+  "idEndereco": 1
 }
 ```
 **Resposta**
@@ -373,7 +567,10 @@ os usuários. Com eles, é possível:
   "tipo": "Geladeira",
   "modelo": "W11",
   "marca": "Brastemp",
-  "potencia": 3000
+  "potencia": 3000,
+  "endereco": {
+    "id": 1
+  }
 }
 ```
 
@@ -396,11 +593,14 @@ os usuários. Com eles, é possível:
 
 ```
 {
-  "id": 1,
+  "id": 1
   "tipo": "Geladeira",
   "modelo": "W11",
   "marca": "Brastemp",
-  "potencia": 3000
+  "potencia": 3000,
+  "endereco": {
+    "id": 1
+  }
 }
 ```
 
@@ -424,11 +624,14 @@ os usuários. Com eles, é possível:
 ```
 [
   {
-    "id": 1,
+    "id": 1
     "tipo": "Geladeira",
     "modelo": "W11",
     "marca": "Brastemp",
-    "potencia": 3000
+    "potencia": 3000,
+    "endereco": {
+      "id": 1
+    }
   }
 ]
 ```
@@ -449,24 +652,29 @@ os usuários. Com eles, é possível:
 **Request**
 
 ```
-  {
-    "tipo": "Geladeira",
-    "modelo": "W11",
-    "marca": "Brastemp",
-    "potencia": 3000
-  }
+{
+  "id": 1
+  "tipo": "Geladeira",
+  "modelo": "W11",
+  "marca": "Brastemp",
+  "potencia": 3000,
+  "idEndereco": 1
+}
 ```
 
 **Resposta**
 
 ```
-   {
-    "id": 1,
-    "tipo": "Geladeira",
-    "modelo": "W11",
-    "marca": "Brastemp",
-    "potencia": 3000
+{
+  "id": 1
+  "tipo": "Geladeira",
+  "modelo": "W11",
+  "marca": "Brastemp",
+  "potencia": 3000,
+  "endereco": {
+    "id": 1
   }
+}
 ```
 
 **Códigos de resposta**
@@ -490,6 +698,48 @@ os usuários. Com eles, é possível:
 | 200    | OK          |
 | 404    | Not Found   |
 
+# 📗 Acessando o Swagger da Aplicação
+A documentação da API da nossa aplicação está disponível através do Swagger,
+uma interface interativa que permite explorar e testar os endpoints da API. 
+Siga os passos abaixo para acessar o Swagger:
+
+1 - Certifique-se de que a aplicação esteja em execução.
+
+2 - Abra seu navegador da web favorito.
+
+3 - Na barra de endereços do navegador, insira o seguinte URL:
+```
+http://localhost:porta_da_aplicacao/tech-challenge-grupo01/swagger-ui/index.html#/
+```
+4 - Substitua porta_da_aplicacao pela porta em que a aplicação está sendo executada localmente. Por padrão, muitas vezes a porta é 8080.
+
+5 - Pressione Enter para acessar a página do Swagger.
+
+Agora você está na interface do Swagger, onde pode ver a lista de todos os endpoints disponíveis, seus detalhes e parâmetros. Explore e teste os endpoints interativamente.
+
+# 🐋 Como iniciar o MySql e PhpMyAdmin com Docker
+1 - Antes de qualquer coisa certifique-se de ter o Docker já instalado e configurado em sua maquina:
+  - https://docs.docker.com/get-docker/
+
+2 -  Abra o terminal no caminho do arquivo ``mysql-docker-compose.yml``:
+```
+...\tech-challenge-grupo-01\src\main\resources\docker
+```
+3 -  Execulte o seguinte comando no terminal:
+```
+docker compose -f mysql-docker-compose.yml up -d
+```
+4 - Pronto agora basta iniciar o projeto.
+
+5 - Para acessar a ferramenta phpMyAdmin para ter acesso ao banco de dados basta inserir a url no seu navegador de preferência:
+```
+http://localhost:8000/
+```
+6 - Entre com usuario e senha configurado no ``application.yml`` que esta como padrão:
+ - Usuario: ``root``
+ - Senha: ``root``
+
+
 # ✔️ Tecnologias e Ferramentas utilizadas
 
 - ``Java``
@@ -497,6 +747,9 @@ os usuários. Com eles, é possível:
 - ``Spring Boot``
 - ``Intellij``
 - ``Postman``
+- ``Docker``
+- ``MySql``
+- ``Swagger``
 
 
 # 📋Desafios e soluções
