@@ -1,5 +1,6 @@
 package br.com.fiap.techchallengegrupo01.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -24,8 +25,12 @@ public class UsuarioModel {
     private String dataNascimento;
     @NotBlank(message = "Sexo não pode ser nulo ou vazio")
     private String sexo;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "usuario")
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario")
+    @JsonBackReference
     private List<PessoaModel> pessoas;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "usuario")
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario")
+    @JsonBackReference
     private List<EnderecoModel> enderecos;
 }

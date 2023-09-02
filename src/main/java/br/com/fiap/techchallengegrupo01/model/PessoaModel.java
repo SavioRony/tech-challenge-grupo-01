@@ -1,5 +1,6 @@
 package br.com.fiap.techchallengegrupo01.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
@@ -30,5 +31,6 @@ public class PessoaModel {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
+    @JsonManagedReference
     private UsuarioModel usuario;
 }

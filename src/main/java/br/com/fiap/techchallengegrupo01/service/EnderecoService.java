@@ -7,6 +7,7 @@ import br.com.fiap.techchallengegrupo01.mapper.EnderecoMapper;
 import br.com.fiap.techchallengegrupo01.model.EnderecoModel;
 import br.com.fiap.techchallengegrupo01.model.UsuarioModel;
 import br.com.fiap.techchallengegrupo01.repository.EnderecoRepository;
+import br.com.fiap.techchallengegrupo01.repository.specification.EnderecoSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +33,8 @@ public class EnderecoService {
         return repository.save(endereco);
     }
 
-    public Set<EnderecoModel> getAll(){
-        return new HashSet<>(repository.findAll());
+    public Set<EnderecoModel> getAll(String _q){
+        return new HashSet<>(repository.findAll(EnderecoSpecification.getFilter(_q)));
     }
 
     public EnderecoModel getById(Long id){

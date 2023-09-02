@@ -8,6 +8,7 @@ import br.com.fiap.techchallengegrupo01.model.EnderecoModel;
 import br.com.fiap.techchallengegrupo01.model.PessoaModel;
 import br.com.fiap.techchallengegrupo01.model.UsuarioModel;
 import br.com.fiap.techchallengegrupo01.repository.PessoaRepository;
+import br.com.fiap.techchallengegrupo01.repository.specification.PessoaSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,9 +43,9 @@ public class PessoaService {
         return repository.save(pessoa);
     }
 
-    public Set<PessoaModel> getAll(){
+    public Set<PessoaModel> getAll(String _q){
 
-        return new HashSet<>(repository.findAll());
+        return new HashSet<>(repository.findAll(PessoaSpecification.getFilter(_q)));
     }
 
     public PessoaModel getById(Long id){

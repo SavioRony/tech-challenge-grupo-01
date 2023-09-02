@@ -55,9 +55,10 @@ public class EnderecoController {
                             )}),
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content)
             })
-    public ResponseEntity<Set<EnderecoResponseDTO>> getAll() {
+    public ResponseEntity<Set<EnderecoResponseDTO>> getAll(
+            @RequestParam(value = "_q", required = false) String _q) {
 
-        var response = service.getAll();
+        var response = service.getAll(_q);
 
         return !response.isEmpty() ? ResponseEntity.ok(mapper.toResponseDtoAll(response)) : ResponseEntity.noContent().build();
     }

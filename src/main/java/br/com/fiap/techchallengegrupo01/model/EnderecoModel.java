@@ -1,5 +1,6 @@
 package br.com.fiap.techchallengegrupo01.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -31,11 +32,12 @@ public class EnderecoModel {
     private String cep;
     private String numero;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH, mappedBy = "endereco")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "endereco")
     private List<EletrodomesticoModel> eletrodomesticos;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
+    @JsonManagedReference
     private UsuarioModel usuario;
 
     @OneToMany(mappedBy = "endereco")
