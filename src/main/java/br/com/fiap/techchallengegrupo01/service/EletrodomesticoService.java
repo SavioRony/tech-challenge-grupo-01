@@ -6,6 +6,7 @@ import br.com.fiap.techchallengegrupo01.mapper.EletrodomesticoMapper;
 import br.com.fiap.techchallengegrupo01.model.EletrodomesticoModel;
 import br.com.fiap.techchallengegrupo01.model.EnderecoModel;
 import br.com.fiap.techchallengegrupo01.repository.EletrodomesticoRepository;
+import br.com.fiap.techchallengegrupo01.repository.specification.EletrodomesticoSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +36,9 @@ public class EletrodomesticoService {
         return repository.findById(id).orElse(null);
     }
 
-    public Set<EletrodomesticoModel> getAll(){
-       return new HashSet<>(repository.findAll());
+    public Set<EletrodomesticoModel> getAll(String _q) {
+
+        return new HashSet<>(repository.findAll(EletrodomesticoSpecification.getFilter(_q)));
     }
 
     public EletrodomesticoModel update (EletrodomesticoRequestDTO dtoUpdated, Long id){

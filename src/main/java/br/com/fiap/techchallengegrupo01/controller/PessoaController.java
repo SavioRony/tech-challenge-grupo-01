@@ -39,7 +39,8 @@ public class PessoaController {
                     ),
                     @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content)
             })
-    public ResponseEntity<PessoaResponseDTO> savePessoas(@RequestBody @Valid PessoaRequestDTO requestDTO) {
+    public ResponseEntity<PessoaResponseDTO> savePessoas(
+            @RequestBody @Valid PessoaRequestDTO requestDTO) {
 
         var response = service.savePessoa(requestDTO);
         return response != null ? ResponseEntity.ok(mapper.toResponseDto(response)) : ResponseEntity.badRequest().build();
@@ -56,9 +57,10 @@ public class PessoaController {
                             )}),
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content)
             })
-    public ResponseEntity<Set<PessoaResponseDTO>> getAll() {
+    public ResponseEntity<Set<PessoaResponseDTO>> getAll(
+            @RequestParam(value = "_q", required = false) String _q) {
 
-        var response = service.getAll();
+        var response = service.getAll(_q);
 
         return !response.isEmpty() ? ResponseEntity.ok(mapper.toResponseDtoAll(response)) : ResponseEntity.noContent().build();
     }

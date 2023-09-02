@@ -40,8 +40,9 @@ public class EletrodomesticoController {
                             )}),
                     @ApiResponse(description = "No Content", responseCode = "204", content = @Content)
             })
-    public ResponseEntity<Set<EletrodomesticoResponseDto>> getAll(){
-        var response = service.getAll();
+    public ResponseEntity<Set<EletrodomesticoResponseDto>> getAll(
+            @RequestParam(value = "_q", required = false) String _q) {
+        var response = service.getAll(_q);
 
         return !response.isEmpty() ? ResponseEntity.ok(mapper.toResponseDtoAll(response)) : ResponseEntity.noContent().build();
     }
