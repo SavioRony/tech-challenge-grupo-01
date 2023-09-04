@@ -1,5 +1,6 @@
 package br.com.fiap.techchallengegrupo01.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,15 +13,17 @@ import java.sql.Date;
 @EqualsAndHashCode
 @Entity
 @Table(name = "tb_consumo")
-public class Consumo {
+public class ConsumoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_eletrodomestico")
+    @JsonIgnore
     private EletrodomesticoModel eletrodomestico;
     private Date data;
     private int horasConsumo;
+
 
 }

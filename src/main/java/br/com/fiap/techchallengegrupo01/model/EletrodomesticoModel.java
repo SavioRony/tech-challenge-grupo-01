@@ -1,11 +1,14 @@
 package br.com.fiap.techchallengegrupo01.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.EqualsAndHashCode;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,4 +33,6 @@ public class EletrodomesticoModel {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_endereco")
     private EnderecoModel endereco;
+    @OneToMany(mappedBy = "eletrodomestico")
+    private List<ConsumoModel> consumos;
 }
