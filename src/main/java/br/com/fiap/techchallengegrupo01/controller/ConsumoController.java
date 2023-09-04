@@ -35,10 +35,10 @@ public class ConsumoController {
                     ),
                     @ApiResponse(description = "Bad Request", responseCode = "400", content = @Content)
             })
-    public ResponseEntity<Boolean> saveConsumo(@RequestBody @Valid ConsumoRequestDTO requestDTO) {
+    public ResponseEntity<?> saveConsumo(@RequestBody @Valid ConsumoRequestDTO requestDTO) {
 
         Boolean response = service.saveConsumoEletrodomestico(requestDTO);
-        return response ? ResponseEntity.ok(response) : ResponseEntity.badRequest().build();
+        return response ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/{idEletrodomestico}")

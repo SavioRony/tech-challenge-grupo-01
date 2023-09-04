@@ -263,8 +263,9 @@ os usuários. Com eles, é possível:
 
 **Requisição**
 
-**`GET /pessoas`**
+**`GET /pessoas?_q=nome:%Jose%,parentesco:Irmão`**
 
+Para realizar uma busca personalizada, basta enviar o parâmetro de consulta `_q`, no qual o valor padrão segue o formato `chave:valor`. Nesse formato, a chave representa o nome do campo e o valor, se incluir `%`, atua como um filtro para todos os dados que contenham o valor entre os caracteres de porcentagem. Se desejar fornecer vários parâmetros, basta separá-los por vírgula.
 **Resposta**
 
 ```
@@ -444,9 +445,9 @@ os usuários. Com eles, é possível:
 
 **Requisição**
 
-**`GET /enderecos`**
+**`GET /enderecos?_q=rua:Rua amazona,estado:SP`**
 
-
+Para realizar uma busca personalizada, basta enviar o parâmetro de consulta `_q`, no qual o valor padrão segue o formato `chave:valor`. Nesse formato, a chave representa o nome do campo e o valor, se incluir `%`, atua como um filtro para todos os dados que contenham o valor entre os caracteres de porcentagem. Se desejar fornecer vários parâmetros, basta separá-los por vírgula.
 **Resposta**
 
 ```
@@ -616,9 +617,9 @@ os usuários. Com eles, é possível:
 
 **Requisição**
 
-**`GET /eletrodomesticos`**
+**`GET /eletrodomesticos?_q=tipo:Geladeira,marca:Brastemp`**
 
-
+Para realizar uma busca personalizada, basta enviar o parâmetro de consulta `_q`, no qual o valor padrão segue o formato `chave:valor`. Nesse formato, a chave representa o nome do campo e o valor, se incluir `%`, atua como um filtro para todos os dados que contenham o valor entre os caracteres de porcentagem. Se desejar fornecer vários parâmetros, basta separá-los por vírgula.
 **Resposta**
 
 ```
@@ -697,6 +698,66 @@ os usuários. Com eles, é possível:
 |--------|-------------|
 | 200    | OK          |
 | 404    | Not Found   |
+
+## **Consumo**
+
+### **Cadastro de cosumo por eletrodomestico**
+
+**Requisição**
+
+**`POST /consumos`**
+
+**Parâmetros da requisição**
+
+| Parâmetro | Tipo    |
+|-----------|---------|
+| idEletrodomestico      | Long    |
+| data    | Date    |
+| horasConsumo     | int     |
+
+**Request**
+
+```
+{
+  "idEletrodomestico": 1,
+  "data": "2023-09-04",
+  "horasConsumo": 2
+}
+```
+
+**Códigos de resposta**
+
+| Código | Descrição   |
+|--------|-------------|
+| 200    | OK          |
+| 400    | Bad Request |
+
+### **Buscar lista de consumo por ID de eletrodomestico**
+
+**Requisição**
+
+**`GET /consumos/{idEletrodomestico}`**
+
+
+**Resposta**
+
+```
+[
+  {
+    "id": 1,
+    "data": "2023-09-04",
+    "horasConsumo": 2
+  }
+]
+```
+
+**Códigos de resposta**
+
+| Código | Descrição   |
+|--------|-------------|
+| 200    | OK          |
+| 404    | Not Found   |
+
 
 # 📗 Acessando o Swagger da Aplicação
 A documentação da API da nossa aplicação está disponível através do Swagger,
